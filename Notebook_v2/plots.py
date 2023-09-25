@@ -48,7 +48,7 @@ class LinePlot:
 
 
 class Heatmap:
-    def __init__(self, data=None, index=None, columns=None, figsize=(5, 5), cmap='summer', annot=True, fmt='d', linewidths=0.5, xlabel=None, ylabel=None, title=None):
+    def __init__(self, data=None, index=None, columns=None, figsize=(5, 5), cmap='summer', annot=True, fmt='d', linewidths=0.8, xlabel=None, ylabel=None, title=None, square=True, label_position=None):
         self.data = data
         self.index = index
         self.columns = columns
@@ -60,6 +60,9 @@ class Heatmap:
         self.xlabel = xlabel
         self.ylabel = ylabel
         self.title = title
+        self.square = square
+        self.label_position = label_position
+
 
     def create_heatmap(self):
         plt.figure(figsize=self.figsize)
@@ -74,7 +77,7 @@ class Heatmap:
     
     def configure_labels(self, x_label_size, y_label_size, label_position):
         if label_position:
-            self.label_position = label_position  # Set the label position if provided
+            self.label_position = label_position
         plt.xticks(fontsize=x_label_size)
         plt.yticks(fontsize=y_label_size)
 

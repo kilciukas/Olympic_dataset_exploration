@@ -49,6 +49,9 @@ class LinePlot:
     def configure_yticks(self, step, min, max):
         plt.yticks(range(min, max+1, step), rotation=90)
 
+    def regline(self,):
+        sns.regplot(data=self.data, x=self.x, y=self.y, scatter=False, ci=False, ax=plt.gca())
+
 class Heatmap:
     def __init__(self, data=None, index=None, columns=None, figsize=(5, 5), cmap='summer', annot=True, fmt='d', linewidths=0.8, xlabel=None, ylabel=None, title=None, square=True, label_position=None):
         self.data = data

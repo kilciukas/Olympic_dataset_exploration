@@ -19,11 +19,11 @@ class BarPlot:
         plt.title(title)
         return self.figure
     
-    @staticmethod
-    def annotate_bars(barplot, fontsize=10, color='black'):
-        for bar in barplot.patches:
-            barplot.annotate(f'{bar.get_width():.0f}', (bar.get_width(), bar.get_y() + bar.get_height() / 2),
-                             ha='left', va='center', fontsize=fontsize, color=color)
+    def configure_xticks(self, step, min, max):
+        plt.xticks(range(min, max+1, step))
+
+    def configure_yticks(self, step, min, max):
+        plt.yticks(range(min, max+1, step))
             
 
 class LinePlot:
@@ -51,6 +51,7 @@ class LinePlot:
 
     def regline(self,):
         sns.regplot(data=self.data, x=self.x, y=self.y, scatter=False, ci=False, ax=plt.gca())
+
 
 class Heatmap:
     def __init__(self, data=None, index=None, columns=None, figsize=(5, 5), cmap='summer', annot=True, fmt='d', linewidths=0.8, xlabel=None, ylabel=None, title=None, square=True, label_position=None):
@@ -92,3 +93,39 @@ class Heatmap:
         elif self.label_position == 'top':
             plt.gca().xaxis.tick_top()
             plt.gca().xaxis.set_label_position('top')
+
+
+class GroupedBarPlot:
+    def __init__(self, data1, data2, labels, label1, label2):
+        self.data1 = data1
+        self.data2 = data2
+        self.labels = labels
+        self.label1 = label1
+        self.label2 = label2
+
+    def set_legend_labels(self, label1, label2):
+            self.label1 = label1
+            self.label2 = label2
+
+    def create_bar_plot(self, title, xlabel, ylabel, figsize=(12, 6)):
+
+        indices = np.arange(len(self.labels))
+
+        bar_width = 0.35
+
+        fig, ax = plt.subplots(figsize=figsize)
+        bars1 = ax.bar(indices - bar_width/2, self.data1, bar_width, label=self.label1)
+        bars2 = ax.bar(indices + bar_width/2, self.data2, bar_width, label=self.label2)
+
+        ax.set_xticks(indices)
+        ax.set_xticklabels(self.labels, rotation=90)
+
+        ax.set_xlabel(xlabel)
+        ax.set_ylabel(ylabel)
+        ax.set_title(title)
+
+        ax.legend()
+
+
+    def adjust_yticks(self, min, max, step):
+        plt.yticks(range(min, max+1, step))

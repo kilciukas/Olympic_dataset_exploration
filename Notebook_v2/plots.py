@@ -141,17 +141,37 @@ class Catplot:
         self.size = size
         self.figure = None
     
-    def create_catplot(self, title):
-        self.figure = plt.figure(figsize=(10,5))
+    def create_catplot(self, title, figsize = (10,5)):
+        self.figure = plt.figure(figsize=figsize)
         sns.catplot(data=self.data, x=self.x, y=self.y, jitter=self.jitter, size=self.size)
         plt.title(title)
-        plt.show()
         return self.figure
     
-    def set_ylim_ticks(self, ylim, min, max, step, rotation):
-        plt.ylim(ylim)
+    def set_ylim_ticks(self, ylim_min, ylim_max, min, max, step, rotation):
+        plt.ylim(ylim_min, ylim_max)
         plt.yticks(range(min, max+1, step))
         plt.xticks(rotation=rotation)
+
+
+class ScatterPlot:
+    def __init__(self, data, x, y, hue = None):
+        self.data = data
+        self.x = x
+        self.y = y
+        self.hue = hue
+        self.figure = None
+    
+    def create_scatterplot(self, title, figsize = (10,5)):
+        self.figure = plt.figure(figsize=figsize)
+        sns.scatterplot(data=self.data, x=self.x, y=self.y, hue=self.hue)
+        plt.title(title)
+        return self.figure
+    
+    def set_yticks(self, min, max, step, rotation=None):
+        plt.yticks(range(min, max + step, step), rotation)
+
+    def set_xticks(self, min, max, step, rotation=None):
+        plt.xticks(range(min, max + step, step), rotation)
 
     
 

@@ -129,3 +129,29 @@ class GroupedBarPlot:
 
     def adjust_yticks(self, min, max, step):
         plt.yticks(range(min, max+1, step))
+
+
+
+class Catplot:
+    def __init__(self, data, x, y, jitter=False, size=10):
+        self.data = data
+        self.x = x
+        self.y = y
+        self.jitter = jitter
+        self.size = size
+        self.figure = None
+    
+    def create_catplot(self, title):
+        self.figure = plt.figure(figsize=(10,5))
+        sns.catplot(data=self.data, x=self.x, y=self.y, jitter=self.jitter, size=self.size)
+        plt.title(title)
+        plt.show()
+        return self.figure
+    
+    def set_ylim_ticks(self, ylim, min, max, step, rotation):
+        plt.ylim(ylim)
+        plt.yticks(range(min, max+1, step))
+        plt.xticks(rotation=rotation)
+
+    
+

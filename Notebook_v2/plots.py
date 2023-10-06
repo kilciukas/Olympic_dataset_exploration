@@ -168,10 +168,10 @@ class ScatterPlot:
         return self.figure
     
     def set_yticks(self, min, max, step, rotation=None):
-        plt.yticks(range(min, max + step, step), rotation)
+        plt.yticks(range(min, max + step, step), rotation=rotation)
 
     def set_xticks(self, min, max, step, rotation=None):
-        plt.xticks(range(min, max + step, step), rotation)
+        plt.xticks(range(min, max + step, step), rotation=rotation)
 
     
 

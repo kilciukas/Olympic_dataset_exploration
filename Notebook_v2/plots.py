@@ -43,11 +43,12 @@ class LinePlot:
         plt.grid(True, linestyle='--', alpha=0.7)
         return self.figure
     
-    def configure_xticks(self, step, min_year, max_year):
-        plt.xticks(range(min_year, max_year+1, step), rotation=90)
+    def configure_xticks(self, step, min_year, max_year, rotation):
+        plt.xticks(range(min_year, max_year+1, step), rotation=rotation)
 
-    def configure_yticks(self, step, min, max):
-        plt.yticks(range(min, max+1, step), rotation=90)
+    def configure_yticks(self, step, min, max, rotation, ylim_min, ylim_max):
+        plt.ylim(ylim_min, ylim_max)
+        plt.yticks(range(min, max+1, step), rotation=rotation)
 
     def regline(self,):
         sns.regplot(data=self.data, x=self.x, y=self.y, scatter=False, ci=False, ax=plt.gca())

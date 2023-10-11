@@ -10,7 +10,7 @@ class BarPlot:
         self.data = data
         self.figure = None
     
-    def create_bar_plot(self, palette, title=None, figsize=(15,20)):
+    def create_bar_plot(self, palette, title=None, figsize=(15,20)): 
         self.figure = plt.figure(figsize=figsize)
         sns.set(style='darkgrid')
         sns.barplot(x=self.x, y=self.y, data=self.data, palette=palette)
@@ -69,10 +69,11 @@ class Heatmap:
         self.title = title
         self.square = square
         self.label_position = label_position
+        self.figure = None
 
 
     def create_heatmap(self):
-        plt.figure(figsize=self.figsize)
+        self.figure = plt.figure(figsize=self.figsize)
         sns.heatmap(self.data, cmap=self.cmap, annot=self.annot, fmt=self.fmt, linewidths=self.linewidths, square=self.square)
         
         if self.xlabel:
@@ -81,6 +82,7 @@ class Heatmap:
             plt.ylabel(self.ylabel)
         if self.title:
             plt.title(self.title)
+        return self.figure
     
     def configure_labels(self, x_label_size, y_label_size, label_position):
         if label_position:
@@ -103,6 +105,7 @@ class GroupedBarPlot:
         self.labels = labels
         self.label1 = label1
         self.label2 = label2
+        self.figure = None
 
     def set_legend_labels(self, label1, label2):
             self.label1 = label1
@@ -127,6 +130,7 @@ class GroupedBarPlot:
 
         ax.legend()
 
+        return fig
 
     def adjust_yticks(self, min, max, step):
         plt.yticks(range(min, max+1, step))
